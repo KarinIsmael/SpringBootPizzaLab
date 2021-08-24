@@ -35,6 +35,12 @@ public class PizzaController {
         }
     }
 
+    /*@GetMapping("/pizzas/{name}")
+    public List <Pizza> getByNames(@PathVariable String name){
+        //List<Pizza> pizzas
+                 return pizzaRepository.findAllByName(name);
+    }*/
+
    @DeleteMapping("/pizzas/{id}")
     public String delete(@PathVariable Long id){
         Optional<Pizza> pizza = pizzaRepository.findById(id);
