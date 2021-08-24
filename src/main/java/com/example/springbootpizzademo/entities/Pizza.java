@@ -15,6 +15,10 @@ public class Pizza {
     public Pizza() {
     }
 
+    public Pizza(Long id) {
+        this.id = id;
+    }
+
     public Pizza(Long id, String name, int price, String ingredients) {
         this.id = id;
         this.name = name;

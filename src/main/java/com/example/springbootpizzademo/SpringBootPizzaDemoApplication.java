@@ -27,7 +27,13 @@ public class SpringBootPizzaDemoApplication {
         /*return (args) ->{
 
         };
+
+
 */
+
+        pizzaRepository.save(new Pizza(1L, "kebab", 120, "ost, tomatsås, kebab, isbergssallad, kebabsås"));
+        pizzaRepository.save(new Pizza(2L, "kebab", 150, "ost, tomatsås, kebab, isbergssallad, kebabsås"));
+
 
         return (args) ->{
 
