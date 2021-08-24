@@ -68,67 +68,16 @@ public class PizzaController {
         return pizzaRepository.save(changedPizza);
     }
 
-    /*@PatchMapping("/pizzas/{id}")
-    public Pizza alterPizza(@PathVariable Long id){
-        Optional<Pizza> pizza = pizzaRepository.findById(id);
-        if(pizza.isPresent()) {
-
+    @PatchMapping(("/pizzas/{id}/{name}"))
+    public Pizza alterPizza(@PathVariable Long id, @PathVariable String name,@RequestBody Pizza body){
+        Optional<Pizza> findPizza = pizzaRepository.findById(id);
+        if (findPizza.isPresent()){
+            Pizza pizza = findPizza.get();
+            pizza.setName(body.getName());
+            return pizzaRepository.save(pizza);
         }else {
-            throw new RuntimeException("Pizza not found for the id "+id);
-        }
-    }*/
-
-   /* @PatchMapping("/pizzas/{id}/{name}")
-    public ResponseEntity<Pizza> alterPizza(@PathVariable Long id, @PathVariable String name) {
-        try {
-            Pizza pizza = pizzaRepository.findById(id).get();
-            pizza.setName(name);
-            return new ResponseEntity<Pizza>(pizzaRepository.save(pizza), HttpStatus.OK);
-        } catch (Exception e) {
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+            throw new RuntimeException("Pizza not found for the id: "+id);
         }
     }
-
-    @PatchMapping("/customer")
-    public ResponseEntity patchSalaryUpdate(@RequestBody Customer customer){
-
-        if(customers.exists(customer.getId())) {
-            // get customer from storage
-            Customer _customer = customers.get(customer.getId());
-
-            // update new values
-            _customer.setSalary(customer.getSalary());
-
-            // save again to customer storage
-            customers.add(_customer);
-
-            return new ResponseEntity("Update Successfully!", HttpStatus.OK);
-        } else {
-            return new ResponseEntity("Not found customer with id = " + customer.getId()
-                    , HttpStatus.NOT_FOUND);
-        }
-    }
-
-
-    @PatchMapping("/pizzas/{id}")
-    public ResponseEntity pizzaUpdate(@PathVariable Long id, @PathVariable String name){
-        Optional<Pizza> pizza = pizzaRepository.findById(id);
-        if(pizza.isPresent()){
-
-            pizza.get().setName(pizzaUpdate(name));
-        }
-        return null;
-    }
-
-
-}
-}*/
-
-
-
-   /* @PatchMapping("/pizzas/{id}")
-    public ResponseEntity<Pizza> updatePizza (@PathVariable Long id, @RequestBody Pizza pizza) {
-        return ResponseEntity.ok(updatePizza(id,pizza));
-    }*/
 
 }
