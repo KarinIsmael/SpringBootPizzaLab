@@ -17,20 +17,6 @@ public class SpringBootPizzaDemoApplication {
     @Bean
     public CommandLineRunner init(PizzaRepository pizzaRepository){
 
-        /*return new CommandLineRunner() {
-            @Override
-            public void run(String... args) throws Exception {
-
-            }
-        };*/ // samma som nedan lambda uttryck
-
-        /*return (args) ->{
-
-        };
-
-
-*/
-
         pizzaRepository.save(new Pizza(1L, "kebab", 120, "ost, tomatsås, kebab, isbergssallad, kebabsås"));
         pizzaRepository.save(new Pizza(2L, "kebab", 150, "ost, tomatsås, kebab, isbergssallad, kebabsås"));
 
