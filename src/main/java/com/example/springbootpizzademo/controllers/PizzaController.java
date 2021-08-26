@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.List;
 import java.util.Optional;
@@ -31,15 +32,9 @@ public class PizzaController {
         if(pizza.isPresent()) {
             return pizza.get();
         }else {
-            throw new RuntimeException("Pizza not found for the id "+id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Pizza not found for the id" + id);
         }
     }
-
-    /*@GetMapping("/pizzas/{name}")
-    public List <Pizza> getByNames(@PathVariable String name){
-        //List<Pizza> pizzas
-                 return pizzaRepository.findAllByName(name);
-    }*/
 
    @DeleteMapping("/pizzas/{id}")
     public String delete(@PathVariable Long id){
@@ -48,7 +43,7 @@ public class PizzaController {
             pizzaRepository.delete(pizza.get());
             return "Pizza with id "+id+" is deleted";
         } else{
-            throw new RuntimeException("Pizza not found for the id "+id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Pizza not found for the id" + id);
         }
     }
 
@@ -70,7 +65,7 @@ public class PizzaController {
             pizza.setName(body.getName());
             return pizzaRepository.save(pizza);
         }else {
-            throw new RuntimeException("Pizza not found for the id: "+id);
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,"Pizza not found for the id" + id);
         }
     }
 
